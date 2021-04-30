@@ -1,0 +1,32 @@
+{
+    "version": "0.2.0",
+
+    "configurations": [
+      {
+            "name": "dev",
+            "type": "dart",
+            "request": "launch",
+            "presentation": {
+                "hidden": false,
+                "group": "launchOpts",
+                "order": 2
+            },
+            "program": "lib/main_dev.dart",
+            "console": "terminal"
+        },
+        {
+            "name": "prd",
+            "type": "dart",
+            "request": "launch",
+            "presentation": {
+                "hidden": false,
+                "group": "launchOpts",
+                "order": 1
+            },
+            "program": "lib/main_prd.dart",
+            "console": "terminal"
+        },
+    ],     
+}
+
+
