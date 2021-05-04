@@ -1,32 +1,25 @@
 {
     "version": "0.2.0",
-
     "configurations": [
-      {
-            "name": "dev",
-            "type": "dart",
-            "request": "launch",
-            "presentation": {
-                "hidden": false,
-                "group": "launchOpts",
-                "order": 2
-            },
-            "program": "lib/main_dev.dart",
-            "console": "terminal"
-        },
+
         {
-            "name": "prd",
+            "name": "Launch",
             "type": "dart",
             "request": "launch",
-            "presentation": {
-                "hidden": false,
-                "group": "launchOpts",
-                "order": 1
-            },
-            "program": "lib/main_prd.dart",
-            "console": "terminal"
-        },
-    ],     
+            "program": "lib/main_${input:pickEnv}.dart",
+                
+        }
+    ],
+    "inputs": [
+        {
+            "id":"pickEnv",
+            "type": "pickString",
+            "description": "Select Environment",
+            "default": "dev",
+            "options": [
+                "dev",
+                "prd"
+            ]
+        }
+    ]
 }
-
-

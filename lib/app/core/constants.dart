@@ -1,24 +1,31 @@
-enum AppTheme { LIGHT, DARK }
-enum ENV { PRD, DEV }
+import 'package:flutter/material.dart';
+import 'package:siga_mobile/app/core/defaults.dart';
+import 'package:siga_mobile/app/core/theme.dart';
+
+class ENV {
+  static const String DEV = "DEV";
+  static const String PRD = "PRD";
+}
 
 class Constants {
-  String _envMode = "DEV";
-  ENV _env = ENV.DEV;
-  
+  String _env = Defaults.defaultEnv;
+
   static final Map<String, dynamic> _data = {
     "PRD": {"app_name": "Siga"},
     "DEV": {"app_name": "Siga_dev"},
   };
 
-  void setEnv(ENV env) {
-    if (env == ENV.DEV)
-      _envMode = "DEV";
-    else
-      _envMode = "PRD";
-    
-  }
+  static final Map<String, ThemeData> _themeData = {
+    "dark": ThemeData.dark(),
+    "light": sigaLightTeme()
+  };
 
-  String get getAppName => _data[_envMode]["app_name"];
-  ENV get getEnv => _env;
+  ThemeData get getDarkTheme => _themeData['dark']!;
+  ThemeData get getLightTheme => _themeData['light']!;
+
+  set setEnv(String env) => _env = env;
+
+  String get getAppName => _data[_env]["app_name"];
+  String get getEnv => _env;
   bool get isDevMode => _env == ENV.DEV;
 }
