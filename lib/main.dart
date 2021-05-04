@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
+import 'package:hive/hive.dart';
+import 'package:siga_mobile/app/app_widget.dart';
+import 'package:siga_mobile/app/core/singletons.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
-import 'app/app_module.dart';
-import 'app/app_widget.dart';
 
 void mainEntry() {
-  runApp(ModularApp(module: AppModule(), child: AppWidget()));
+  registerSingletons();
+  
+  runApp(AppWidget());
 }

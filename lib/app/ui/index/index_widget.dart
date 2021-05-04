@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
-
-import '../app_controller.dart';
+import 'package:get_it/get_it.dart';
+import 'package:siga_mobile/app/app_controller.dart';
 
 class IndexWidget extends StatelessWidget {
-  final _controller = Modular.get<AppController>();
+final _controller = GetIt.I<AppController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(

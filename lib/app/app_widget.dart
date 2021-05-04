@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:asuka/asuka.dart' as asuka;
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:flutter_modular/flutter_modular.dart';
+import 'package:get_it/get_it.dart';
 import 'package:siga_mobile/app/app_controller.dart';
-
 import 'core/constants.dart';
 
-final _controller = Modular.get<AppController>();
-final _const = Modular.get<Constants>();
+
+final _controller = GetIt.I<AppController>();
+final _const = GetIt.I<Constants>();
 
 class AppWidget extends StatelessWidget {
   @override
@@ -21,8 +21,9 @@ class AppWidget extends StatelessWidget {
         ),
         darkTheme: ThemeData.dark(),
         themeMode: _controller.getCurrentTheme,
-        initialRoute: Modular.initialRoute,
-      ).modular(),
+        initialRoute: "/",
+        navigatorObservers: [],
+      )
     );
   }
 }
