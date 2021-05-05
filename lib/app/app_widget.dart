@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:asuka/asuka.dart' as asuka;
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
-import 'package:siga_mobile/app/app_controller.dart';
 import 'package:siga_mobile/app/core/router.dart';
+import 'package:siga_mobile/app/viewmodels/app/app_viewmodel.dart';
 import 'core/constants.dart';
 
-final _controller = GetIt.I<AppController>();
+final _controller = GetIt.I<AppViewModel>();
 final _router = GetIt.I<SigaRouter>();
 final _const = GetIt.I<Constants>();
 
@@ -21,8 +21,9 @@ class AppWidget extends StatelessWidget {
         theme: _const.getLightTheme,
         darkTheme: _const.getDarkTheme,
         themeMode: _controller.getCurrentTheme,
-        initialRoute: _router.initialRoute,
-        routes: _router.getRoutes,
+        // initialRoute: _router.initialRoute,
+        // routes: _router.getRoutes,
+        home: _router.getInitialRoute,
       ),
     );
   }

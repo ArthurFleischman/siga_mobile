@@ -1,48 +1,47 @@
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:siga_mobile/app/core/logger.dart';
 import 'package:siga_mobile/app/interfaces/i_local_storage.dart';
 
-class LocalStorage extends ILocalStorage{
+class LocalStorage extends Logger implements ILocalStorage {
   @override
-  Future<bool> delete() {
-    // TODO: implement delete
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<T> get<T>() {
-    // TODO: implement get
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<bool> init(List<String> registryNames) async {
-    try{
-      await Hive.initFlutter();
-      
-      registryNames.forEach((name) async => await Hive.openBox(name));
-    }
-    catch(e){
-      print("error");
-      return false;
-    }
+  Future<bool> delete() async {
     return true;
   }
 
   @override
-  Future<bool> put() {
-    // TODO: implement put
-    throw UnimplementedError();
+  Future<T?> get<T>(String boxName, String key) async {
+    Box _box = (await _getBoxExistence(boxName))!;
+    return _box.get(key, defaultValue: null);
+  }
+
+  Future<Box?> _getBoxExistence(String boxName) async {
+    message("asserting box $boxName existence");
+    if (await Hive.boxExists(boxName)) {
+      message('Box $boxName do exist');
+      return Hive.box(boxName);
+    } else {
+      error("box dont exist");
+      return null;
+    }
   }
 
   @override
-  Future<bool> update() {
-    // TODO: implement update
-    throw UnimplementedError();
+  Future<void> init() async {
+    await Hive.initFlutter();
+    await Hive.openBox("config");
+    await Hive.openBox("cache");
+    message("all boxes oppenend");
   }
-  
 
-    
-  
+  @override
+  Future<void> put<T>(String boxName, String key, T value) async {
+    Box _box = (await _getBoxExistence(boxName))!;
+    _box.put(key, value);
+  }
 
+  @override
+  Future<bool> update() async {
+    return true;
+  }
 }

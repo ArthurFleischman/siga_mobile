@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 import 'package:siga_mobile/app/core/defaults.dart';
-part 'app_controller.g.dart';
+part 'app_viewmodel.g.dart';
 
-class AppController = _AppControllerBase with _$AppController;
+class AppViewModel = _AppViewModelBase with _$AppViewModel;
 
-abstract class _AppControllerBase with Store {
-  
+abstract class _AppViewModelBase with Store {
   @observable
   AppTheme _appTheme = Defaults.defualtTheme;
 

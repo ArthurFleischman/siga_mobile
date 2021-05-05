@@ -16,7 +16,7 @@ class Constants {
   };
 
   static final Map<String, ThemeData> _themeData = {
-    "dark": ThemeData.dark(),
+    "dark": sigaDarkTeme(),
     "light": sigaLightTeme()
   };
 
