@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:siga_mobile/app/components/text_button.dart';
+import 'package:siga_mobile/app/components/index_square_card.dart';
 import 'package:siga_mobile/app/viewmodels/index/index_viewmodel.dart';
 import 'package:siga_mobile/app/views/unauth/index/index_logo_box.dart';
-import 'package:siga_mobile/app/views/unauth/login/login_view.dart';
+import 'package:siga_mobile/app/views/unauth/index/index_menu_bar.dart';
+// import 'package:siga_mobile/app/views/unauth/index/index_menu_bar.dart';
+import 'package:siga_mobile/app/views/unauth/login_component/login_view.dart';
 
 class IndexView extends StatefulWidget {
   @override
@@ -12,36 +14,49 @@ class IndexView extends StatefulWidget {
 
 class _IndexViewState extends State<IndexView> {
   final _vm = GetIt.I<IndexViewModel>();
+  Widget _bodyWidget = IndexMenuBar();
+  @override
+  void initState() {
+    _vm.setSwitchToLogin = _changeBodyWidget;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 45),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Spacer(flex: 2),
-              IndexLogoBox(),
-              Spacer(flex: 1),
-              SigaTextButton(
-                text: "Login",
-                onPressed: () => _vm.navigateToLogin(context),
-              ),
-              SigaTextButton(
-                text: "Request Access",
-                onPressed: () => print("ok"),
-              ),
-              SigaTextButton(
-                text: "About Siga",
-                onPressed: () => print("ok"),
-              ),
-              Spacer(flex: 2),
-            ],
+    return Scaffold(
+      body: DecoratedBox(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/images/student.jpg"),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: SafeArea(
+          child: WillPopScope(
+            onWillPop: () async => false,
+            child: Stack(
+              children: [
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: IndexLogoBox(),
+                ),
+                AnimatedSwitcher(
+                  duration: const Duration(seconds: 2),
+                  transitionBuilder: (child, animation) => ScaleTransition(
+                    child: child,
+                    scale: animation,
+                  ),
+                  child: _bodyWidget,
+                ),
+              ],
+            ),
           ),
         ),
       ),
     );
+  }
+
+  void _changeBodyWidget() {
+    setState(() => _bodyWidget = LoginView());
   }
 }

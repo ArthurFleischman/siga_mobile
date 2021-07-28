@@ -21,8 +21,6 @@ class AppWidget extends StatelessWidget {
         theme: _const.getLightTheme,
         darkTheme: _const.getDarkTheme,
         themeMode: _controller.getCurrentTheme,
-        // initialRoute: _router.initialRoute,
-        // routes: _router.getRoutes,
         home: _router.getInitialRoute,
       ),
     );

@@ -7,7 +7,8 @@ ThemeData sigaLightTeme() {
     primarySwatch: Colors.blueGrey,
     textButtonTheme: TextButtonThemeData(
       style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all<Color>(Colors.red),
+        backgroundColor:
+            MaterialStateProperty.all<Color>(Color.fromRGBO(33, 54, 112, 1)),
         foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(24))),
