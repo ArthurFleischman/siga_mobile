@@ -16,22 +16,25 @@ class _LoginViewState extends State<LoginView> {
   Widget build(BuildContext context) {
     return Align(
       alignment: Alignment.center,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          IconButton(
-            onPressed: _vm.getSwitchfunction,
-            icon: Icon(
-              Icons.arrow_back,
-              size: 24,
-              color: Colors.white,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            IconButton(
+              onPressed: _vm.getSwitchfunction,
+              icon: Icon(
+                Icons.arrow_back,
+                size: 24,
+                color: Colors.white,
+              ),
             ),
-          ),
-          LoginFormFrame(
-            form: LoginForm(),
-          ),
-        ],
+            LoginFormFrame(
+              form: LoginForm(),
+            ),
+          ],
+        ),
       ),
     );
   }
