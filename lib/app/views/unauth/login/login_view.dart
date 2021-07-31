@@ -18,7 +18,6 @@ class _LoginViewState extends State<LoginView> {
       alignment: Alignment.center,
       child: Column(
         mainAxisSize: MainAxisSize.min,
-        // mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           IconButton(

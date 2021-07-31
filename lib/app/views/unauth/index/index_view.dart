@@ -23,7 +23,7 @@ class _IndexViewState extends State<IndexView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      // resizeToAvoidBottomInset: false,
       body: DecoratedBox(
         position: DecorationPosition.background,
         decoration: BoxDecoration(
