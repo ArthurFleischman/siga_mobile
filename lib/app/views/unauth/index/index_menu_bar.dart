@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:siga_mobile/app/components/index_square_card.dart';
 import 'package:siga_mobile/app/viewmodels/index/index_viewmodel.dart';
-import 'package:siga_mobile/app/views/unauth/index/index_logo_box.dart';
 
 final _vm = GetIt.I<IndexViewModel>();
 
@@ -19,7 +18,7 @@ class IndexMenuBar extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             IndexSquareCard(
-              onTap: _vm.getSwitchToLogin!,
+              onTap: _vm.getSwitchfunction!,
               icon: Icons.login,
               text: "Login",
             ),
