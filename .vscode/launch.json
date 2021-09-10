@@ -1,18 +1,16 @@
 {
     "version": "0.2.0",
     "configurations": [
-
         {
-            "name": "Launch",
+            "name": "Start",
             "type": "dart",
             "request": "launch",
             "program": "lib/main_${input:pickEnv}.dart",
-                
         }
     ],
     "inputs": [
         {
-            "id":"pickEnv",
+            "id": "pickEnv",
             "type": "pickString",
             "description": "Select Environment",
             "default": "dev",

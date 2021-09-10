@@ -1,4 +1,3 @@
-import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -6,20 +5,22 @@ class LoginFormField extends StatelessWidget {
   final int? numberOfChar;
   final MaxLengthEnforcement showCharCounter;
   final String? Function(String?) validator;
-  final TextEditingController controller;
+  final TextEditingController? controller;
   final TextInputType? inputType;
   final List<TextInputFormatter>? formaterList;
+  final bool? isPassword;
   final hintText;
 
   const LoginFormField(
       {Key? key,
       required this.validator,
       this.hintText,
-      required this.controller,
+      this.controller,
       required this.showCharCounter,
       this.numberOfChar,
       this.inputType,
-      this.formaterList})
+      this.formaterList,
+      this.isPassword})
       : super(key: key);
 
   @override
@@ -32,6 +33,7 @@ class LoginFormField extends StatelessWidget {
       controller: controller,
       keyboardType: inputType,
       inputFormatters: formaterList,
+      obscureText: isPassword != null ? isPassword! : false,
       decoration: InputDecoration(
         // border: InputBorder.none,
         // focusedBorder: InputBorder.none,

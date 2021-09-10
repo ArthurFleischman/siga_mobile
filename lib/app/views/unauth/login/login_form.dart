@@ -1,18 +1,24 @@
 import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get_it/get_it.dart';
 import 'package:siga_mobile/app/components/login_form_field.dart';
+import 'package:siga_mobile/app/viewmodels/login/login_viewmodel.dart';
 
 class LoginForm extends StatelessWidget {
-  final TextEditingController _controller = TextEditingController();
+  final _loginVm = GetIt.I<LoginViewmodel>();
+  final _formKey = GlobalKey<FormState>();
+  final _username = TextEditingController();
+  final _password = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Form(
+      key: _formKey,
       child: Column(
         children: [
           LoginFormField(
             hintText: "CPF: (only numbers)",
-            controller: _controller,
             validator: _validateCPF,
             showCharCounter: MaxLengthEnforcement.enforced,
             numberOfChar: 14,
@@ -21,10 +27,26 @@ class LoginForm extends StatelessWidget {
               FilteringTextInputFormatter.digitsOnly,
               CpfInputFormatter()
             ],
+            controller: _username,
           ),
-          TextFormField(),
+          LoginFormField(
+            hintText: "Password",
+            validator: _validatePassword,
+            showCharCounter: MaxLengthEnforcement.none,
+            inputType: TextInputType.visiblePassword,
+            isPassword: true,
+            controller: _password,
+          ),
           TextButton(
-            onPressed: () => print("OK"),
+            onPressed: () async {
+              FocusScope.of(context).unfocus();
+              if (_formKey.currentState!.validate())
+                await _loginVm.login(
+                    context,
+                    _username.text
+                        .replaceAll(RegExp(CPFValidator.STRIP_REGEX), ''),
+                    _password.text);
+            },
             child: Text("login"),
           ),
         ],
@@ -33,5 +55,7 @@ class LoginForm extends StatelessWidget {
   }
 
   String? _validateCPF(String? value) =>
-      UtilBrasilFields.isCPFValido(value) ? "cpf is invalid" : null;
+      !UtilBrasilFields.isCPFValido(value) ? "cpf is invalid" : null;
+  String? _validatePassword(String? value) =>
+      value!.isEmpty ? "password cannot be empty" : null;
 }

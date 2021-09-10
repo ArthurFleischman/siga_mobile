@@ -17,14 +17,15 @@ class SigaRouter extends Logger implements IRouter {
   Widget get getInitialRoute => _initialRoute;
 
   void setupRoutes() async {
-    switch ((await _localStorage.get("config", "isUserLogged"))) {
-      case true:
-        _initialRoute = HomeView();
-        break;
-      case false:
-      case null:
-        _initialRoute = IndexView();
-        break;
-    }
+    if (await _localStorage.get("cache", "user") != null) {
+      _initialRoute = HomeView();
+    } else
+      _initialRoute = IndexView();
+  }
+
+  void navigate(BuildContext context, Widget route) {
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(builder: (context) => route),
+    );
   }
 }

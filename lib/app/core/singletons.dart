@@ -5,6 +5,7 @@ import 'package:siga_mobile/app/core/router.dart';
 import 'package:siga_mobile/app/shared/local_storage.dart';
 import 'package:siga_mobile/app/viewmodels/app/app_viewmodel.dart';
 import 'package:siga_mobile/app/viewmodels/index/index_viewmodel.dart';
+import 'package:siga_mobile/app/viewmodels/login/login_viewmodel.dart';
 
 GetIt _getIt = GetIt.instance;
 
@@ -16,4 +17,6 @@ void registerSingletons() {
   _getIt.registerSingleton<Logger>(Logger(), signalsReady: true);
   _getIt.registerSingleton<SigaRouter>(SigaRouter(), signalsReady: true);
   _getIt.registerSingleton<LocalStorage>(LocalStorage(), signalsReady: true);
+  _getIt.registerSingleton<LoginViewmodel>(LoginViewmodel(),
+      signalsReady: true);
 }
