@@ -1,6 +1,7 @@
 import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
 import 'package:siga_mobile/app/components/login_form_field.dart';
 import 'package:siga_mobile/app/viewmodels/login/login_viewmodel.dart';
@@ -37,17 +38,21 @@ class LoginForm extends StatelessWidget {
             isPassword: true,
             controller: _password,
           ),
-          TextButton(
-            onPressed: () async {
-              FocusScope.of(context).unfocus();
-              if (_formKey.currentState!.validate())
-                await _loginVm.login(
-                    context,
-                    _username.text
-                        .replaceAll(RegExp(CPFValidator.STRIP_REGEX), ''),
-                    _password.text);
-            },
-            child: Text("login"),
+          Observer(
+            builder: (_) => TextButton(
+              onPressed: _loginVm.isLogin
+                  ? null
+                  : () async {
+                      FocusScope.of(context).unfocus();
+                      if (_formKey.currentState!.validate())
+                        await _loginVm.login(
+                            context,
+                            _username.text.replaceAll(
+                                RegExp(CPFValidator.STRIP_REGEX), ''),
+                            _password.text);
+                    },
+              child: Text("login"),
+            ),
           ),
         ],
       ),

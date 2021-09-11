@@ -23,7 +23,13 @@ abstract class _AppViewModelBase with Store {
       _appTheme = AppTheme.LIGHT;
   }
 
-  void setApiToken(String token) {
-    _localStorage.put("config", "token", token);
+  void setApiToken(String token) async {
+    await _localStorage.put("cache", "token", token);
   }
+
+  Future<void> clearSessionData() async {
+    await _localStorage.clearSessionData();
+  }
+
+  String? get getApiToken => _localStorage.get<String>("cache", "token");
 }

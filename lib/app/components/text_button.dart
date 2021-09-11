@@ -9,7 +9,7 @@ class SigaTextButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       clipBehavior: Clip.antiAlias,
-      onPressed: () => null,
+      onPressed: onPressed,
       child: Text(
         text,
         style: TextStyle(color: Color.fromRGBO(33, 54, 112, 1)),

@@ -10,8 +10,8 @@ class LocalStorage extends Logger implements ILocalStorage {
   }
 
   @override
-  Future<T?> get<T>(String boxName, String key) async {
-    Box _box = (await _getBoxExistence(boxName))!;
+  T get<T>(String boxName, String key) {
+    Box _box = Hive.box(boxName);
     return _box.get(key, defaultValue: null);
   }
 
@@ -43,5 +43,15 @@ class LocalStorage extends Logger implements ILocalStorage {
   @override
   Future<bool> update() async {
     return true;
+  }
+
+  Future<String> getStoredID() async {
+    return await get("cache", "user");
+  }
+
+  Future<void> clearSessionData() async {
+    Box _box = Hive.box("cache");
+    await _box.delete("user");
+    await _box.delete("token");
   }
 }

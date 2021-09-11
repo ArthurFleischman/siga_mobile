@@ -8,31 +8,38 @@ AppViewModel _appVm = GetIt.I<AppViewModel>();
 Constants _constants = GetIt.I<Constants>();
 
 class ClientHttpService implements IRepository {
-  final Dio dio = Dio(BaseOptions(
-      baseUrl: _constants.getApiUrl, connectTimeout: _constants.getTimeout));
+  final Dio _dio = Dio(
+    BaseOptions(
+        baseUrl: _constants.getApiUrl, connectTimeout: _constants.getTimeout),
+  );
 
   @override
   void addToken(String token) {
+    _dio.interceptors.add(InterceptorsWrapper(onRequest:
+        (RequestOptions options, RequestInterceptorHandler handler) async {
+      options.headers['Authorization'] = "Bearer " + token;
+      handler.next(options);
+    }));
     _appVm.setApiToken(token);
   }
 
   @override
   Future<Response<dynamic>> delete(String url) async {
-    return await dio.delete(url);
+    return await _dio.delete(url);
   }
 
   @override
-  Future<Response<dynamic>> get(String url, String params) async {
-    return await dio.get(url);
+  Future<Response<Map>> get(String url) async {
+    return await _dio.get(url);
   }
 
   @override
-  Future<Response<dynamic>> post(String url, dynamic data) async {
-    return await dio.post(url, data: data);
+  Future<Response<Map>> post(String url, dynamic data) async {
+    return await _dio.post(url, data: data);
   }
 
   @override
-  Future<Response<dynamic>> put(String url, dynamic data) async {
-    return await dio.put(url, data: data);
+  Future<Response<Map>> put(String url, dynamic data) async {
+    return await _dio.put(url, data: data);
   }
 }

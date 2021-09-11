@@ -17,6 +17,7 @@ class _IndexViewState extends State<IndexView> {
   @override
   void initState() {
     _vm.setSwitchFunction = _switchWidget;
+    switchCond = false;
     super.initState();
   }
 

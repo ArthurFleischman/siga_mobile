@@ -28,11 +28,11 @@ mixin _$LoginViewmodel on _LoginViewmodelBase, Store {
       ActionController(name: '_LoginViewmodelBase');
 
   @override
-  void setLogin(bool state) {
+  void _setLogin(bool state) {
     final _$actionInfo = _$_LoginViewmodelBaseActionController.startAction(
-        name: '_LoginViewmodelBase.setLogin');
+        name: '_LoginViewmodelBase._setLogin');
     try {
-      return super.setLogin(state);
+      return super._setLogin(state);
     } finally {
       _$_LoginViewmodelBaseActionController.endAction(_$actionInfo);
     }

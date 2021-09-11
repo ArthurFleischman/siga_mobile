@@ -16,15 +16,22 @@ class SigaRouter extends Logger implements IRouter {
 
   Widget get getInitialRoute => _initialRoute;
 
-  void setupRoutes() async {
-    if (await _localStorage.get("cache", "user") != null) {
+  void setupRoutes() {
+    print(_localStorage.get("cache", "user"));
+    if (_localStorage.get("cache", "user") != null) {
       _initialRoute = HomeView();
     } else
       _initialRoute = IndexView();
   }
 
-  void navigate(BuildContext context, Widget route) {
+  void popAndNavigate(BuildContext context, Widget route) {
     Navigator.of(context).pushReplacement(
+      MaterialPageRoute(builder: (context) => route),
+    );
+  }
+
+  void navigate(BuildContext context, Widget route) {
+    Navigator.of(context).push(
       MaterialPageRoute(builder: (context) => route),
     );
   }
