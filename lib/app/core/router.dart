@@ -18,6 +18,7 @@ class SigaRouter extends Logger implements IRouter {
 
   void setupRoutes() {
     print(_localStorage.get("cache", "user"));
+    print(_localStorage.get("cache", "token"));
     if (_localStorage.get("cache", "user") != null) {
       _initialRoute = HomeView();
     } else

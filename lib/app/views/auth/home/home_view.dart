@@ -12,7 +12,7 @@ class HomeView extends StatelessWidget {
     return Scaffold(
       body: Center(
         child: FutureBuilder<User?>(
-          future: _homeVM.getUser(),
+          future: _homeVM.getUser(context),
           builder: (context, asyncSnap) {
             if (asyncSnap.hasData) {
               if (asyncSnap.connectionState == ConnectionState.waiting)

@@ -61,12 +61,4 @@ class _IndexViewState extends State<IndexView> {
   void _switchWidget() {
     setState(() => switchCond = !switchCond);
   }
-
-  // void _setIndex() {
-  //   setState(() => _bodyWidget = LoginView());
-  // }
-
-  // void _setLogin() {
-  //   setState(() => _bodyWidget = IndexMenuBar());
-  // }
 }

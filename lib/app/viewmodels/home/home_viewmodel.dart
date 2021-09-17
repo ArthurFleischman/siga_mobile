@@ -1,4 +1,5 @@
 import 'package:asuka/asuka.dart' as asuka;
+import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mobx/mobx.dart';
 import 'package:siga_mobile/app/core/router.dart';
@@ -17,8 +18,8 @@ abstract class _HomeViewmodelBase with Store {
   LocalStorage _localStorage = GetIt.I<LocalStorage>();
   SigaRouter _router = GetIt.I<SigaRouter>();
   AppViewModel _appVM = GetIt.I<AppViewModel>();
-  Future<User?> getUser() async {
-    return _userRepo.getUser(await _localStorage.getStoredID());
+  Future<User?> getUser(BuildContext context) async {
+    return _userRepo.getUser(await _localStorage.getStoredID(), context);
   }
 
   Future<void> logout(context) async {
