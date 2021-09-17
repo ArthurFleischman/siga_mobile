@@ -18,15 +18,22 @@ abstract class _HomeViewmodelBase with Store {
   LocalStorage _localStorage = GetIt.I<LocalStorage>();
   SigaRouter _router = GetIt.I<SigaRouter>();
   AppViewModel _appVM = GetIt.I<AppViewModel>();
+  BuildContext? _ctx;
+  set setCtx(BuildContext ctx) => _ctx = ctx;
   Future<User?> getUser(BuildContext context) async {
-    return _userRepo.getUser(await _localStorage.getStoredID(), context);
+    User? user =
+        await _userRepo.getUser(await _localStorage.getStoredID(), context);
+    if (user != null)
+      return user;
+    else
+      logout();
   }
 
-  Future<void> logout(context) async {
+  Future<void> logout() async {
     try {
       if (await _userRepo.logout()) {
         await _appVM.clearSessionData();
-        _router.navigate(context, IndexView());
+        _router.navigate(_ctx!, IndexView());
       }
     } catch (e) {
       asuka.showSnackBar(asuka.AsukaSnackbar.alert("could not logout\n$e"));

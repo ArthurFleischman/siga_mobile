@@ -9,6 +9,7 @@ HomeViewmodel _homeVM = GetIt.I<HomeViewmodel>();
 class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    _homeVM.setCtx = context;
     return Scaffold(
       body: Center(
         child: FutureBuilder<User?>(
@@ -23,7 +24,7 @@ class HomeView extends StatelessWidget {
                   children: [
                     Text("${asyncSnap.data!.name}"),
                     SigaTextButton(
-                        onPressed: () async => await _homeVM.logout(context),
+                        onPressed: () async => await _homeVM.logout(),
                         text: "logout"),
                   ],
                 );
