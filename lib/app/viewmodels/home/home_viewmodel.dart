@@ -20,12 +20,11 @@ abstract class _HomeViewmodelBase with Store {
   AppViewModel _appVM = GetIt.I<AppViewModel>();
   BuildContext? _ctx;
   set setCtx(BuildContext ctx) => _ctx = ctx;
-  Future<User?> getUser(BuildContext context) async {
+  Future<User?> getUser() async {
     try {
-      return _userRepo.getUser(await _localStorage.getStoredID(), context);
+      return _userRepo.getUser(await _localStorage.getStoredID());
     } catch (e) {
       asuka.showSnackBar(asuka.AsukaSnackbar.alert("credentials timed out"));
-      logout();
     }
   }
 

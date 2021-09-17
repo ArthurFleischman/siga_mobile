@@ -9,9 +9,8 @@ import 'package:siga_mobile/app/views/unauth/index/index_view.dart';
 
 class UserRepository {
   ClientHttpService _client = GetIt.I<ClientHttpService>();
-  SigaRouter _router = GetIt.I<SigaRouter>();
 
-  Future<User?> getUser(String id, BuildContext context) async {
+  Future<User?> getUser(String id) async {
     try {
       Response<dynamic> response = await _client.get("/safe/users/$id");
       if (response.statusCode == 200) {
@@ -21,8 +20,6 @@ class UserRepository {
     } catch (e) {
       asuka.showSnackBar(
           asuka.AsukaSnackbar.alert("user not found\n${e.toString()}"));
-
-      _router.popAndNavigate(context, IndexView());
     }
   }
 
