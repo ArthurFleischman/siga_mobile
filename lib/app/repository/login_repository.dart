@@ -17,8 +17,9 @@ class LoginRepository extends Logger {
       Response<dynamic> response = await _client.post(
           "/login", json.encode({"username": username, "password": password}));
       if (response.statusCode == 200) {
-        _client.addToken(response.data["token"]);
-        _storage.put("cache", "user", response.data["id"]);
+        await _client.addToken(response.data["token"]);
+        _client.init();
+        await _storage.put("cache", "user", response.data["id"]);
         return true;
       } else
         return false;

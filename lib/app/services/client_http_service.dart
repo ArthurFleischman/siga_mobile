@@ -22,8 +22,8 @@ class ClientHttpService implements IRepository {
   }
 
   @override
-  void addToken(String token) {
-    _appVm.setApiToken(token);
+  Future<void> addToken(String token) async {
+    await _appVm.setApiToken(token);
   }
 
   @override

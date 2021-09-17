@@ -23,7 +23,7 @@ abstract class _AppViewModelBase with Store {
       _appTheme = AppTheme.LIGHT;
   }
 
-  void setApiToken(String token) async {
+  Future<void> setApiToken(String token) async {
     await _localStorage.put("cache", "token", token);
   }
 

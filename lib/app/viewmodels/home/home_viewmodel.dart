@@ -25,6 +25,7 @@ abstract class _HomeViewmodelBase with Store {
       return _userRepo.getUser(await _localStorage.getStoredID());
     } catch (e) {
       asuka.showSnackBar(asuka.AsukaSnackbar.alert("credentials timed out"));
+      logout();
     }
   }
 
