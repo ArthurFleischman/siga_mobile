@@ -13,10 +13,10 @@ class ClientHttpService implements IRepository {
         baseUrl: _constants.getApiUrl, connectTimeout: _constants.getTimeout),
   );
   void init() {
-    String token = _appVm.getApiToken!;
+    String? token = _appVm.getApiToken;
     _dio.interceptors.add(InterceptorsWrapper(onRequest:
         (RequestOptions options, RequestInterceptorHandler handler) async {
-      options.headers['Authorization'] = "Bearer $token";
+      options.headers['Authorization'] = "Bearer ${token != null ? token : ''}";
       handler.next(options);
     }));
   }

@@ -31,5 +31,5 @@ abstract class _AppViewModelBase with Store {
     await _localStorage.clearSessionData();
   }
 
-  String? get getApiToken => _localStorage.get<String>("cache", "token");
+  String? get getApiToken => _localStorage.get<String?>("cache", "token");
 }
