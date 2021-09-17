@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:asuka/asuka.dart' as asuka;
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -7,9 +5,7 @@ import 'package:get_it/get_it.dart';
 import 'package:siga_mobile/app/core/router.dart';
 import 'package:siga_mobile/app/models/user.dart';
 import 'package:siga_mobile/app/services/client_http_service.dart';
-import 'package:siga_mobile/app/viewmodels/home/home_viewmodel.dart';
 import 'package:siga_mobile/app/views/unauth/index/index_view.dart';
-// import 'package:siga_mobile/app/shared/local_storage.dart';
 
 class UserRepository {
   ClientHttpService _client = GetIt.I<ClientHttpService>();
