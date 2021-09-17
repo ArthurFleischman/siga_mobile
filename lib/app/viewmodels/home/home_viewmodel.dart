@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:asuka/asuka.dart' as asuka;
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
@@ -21,12 +23,12 @@ abstract class _HomeViewmodelBase with Store {
   BuildContext? _ctx;
   set setCtx(BuildContext ctx) => _ctx = ctx;
   Future<User?> getUser(BuildContext context) async {
-    User? user =
-        await _userRepo.getUser(await _localStorage.getStoredID(), context);
-    if (user != null)
-      return user;
-    else
+    try {
+      return _userRepo.getUser(await _localStorage.getStoredID(), context);
+    } catch (e) {
+      asuka.showSnackBar(asuka.AsukaSnackbar.alert("credentials timed out"));
       logout();
+    }
   }
 
   Future<void> logout() async {
