@@ -13,7 +13,6 @@ part 'login_viewmodel.g.dart';
 class LoginViewmodel = _LoginViewmodelBase with _$LoginViewmodel;
 final LoginRepository _loginRepo = LoginRepository();
 SigaRouter _router = GetIt.I<SigaRouter>();
-// IndexViewModel _indexVM = GetIt.I<IndexViewModel>();
 
 abstract class _LoginViewmodelBase with Store {
   @observable
@@ -27,7 +26,6 @@ abstract class _LoginViewmodelBase with Store {
   Future<void> login(
       BuildContext context, String username, String password) async {
     _setLogin(true);
-
     if (await _loginRepo.login(username, password)) {
       _router.navigate(context, HomeView());
     } else

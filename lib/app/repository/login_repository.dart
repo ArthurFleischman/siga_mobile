@@ -9,7 +9,6 @@ import 'package:siga_mobile/app/shared/local_storage.dart';
 
 class LoginRepository extends Logger {
   final ClientHttpService _client = GetIt.I<ClientHttpService>();
-  // final Constants _const = GetIt.I<Constants>();
   final LocalStorage _storage = GetIt.I<LocalStorage>();
 
   Future<bool> login(String username, String password) async {
@@ -18,7 +17,6 @@ class LoginRepository extends Logger {
           "/login", json.encode({"username": username, "password": password}));
       if (response.statusCode == 200) {
         await _client.addToken(response.data["token"]);
-        _client.init();
         await _storage.put("cache", "user", response.data["id"]);
         return true;
       } else

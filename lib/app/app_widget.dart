@@ -13,15 +13,18 @@ final _const = GetIt.I<Constants>();
 class AppWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Observer(
-      builder: (_) => MaterialApp(
-        debugShowCheckedModeBanner: _const.isDevMode ? true : false,
-        title: _const.getAppName,
-        builder: asuka.builder,
-        theme: _const.getLightTheme,
-        darkTheme: _const.getDarkTheme,
-        themeMode: _controller.getCurrentTheme,
-        home: _router.getInitialRoute,
+    return FutureBuilder(
+      future: GetIt.I.allReady(),
+      builder: (BuildContext context, AsyncSnapshot snapshot) => Observer(
+        builder: (_) => MaterialApp(
+          debugShowCheckedModeBanner: _const.isDevMode ? true : false,
+          title: _const.getAppName,
+          builder: asuka.builder,
+          theme: _const.getLightTheme,
+          darkTheme: _const.getDarkTheme,
+          themeMode: _controller.getCurrentTheme,
+          home: _router.getInitialRoute,
+        ),
       ),
     );
   }

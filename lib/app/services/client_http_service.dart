@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:siga_mobile/app/core/constants.dart';
+import 'package:siga_mobile/app/core/logger.dart';
 import 'package:siga_mobile/app/interfaces/i_repository.dart';
 import 'package:get_it/get_it.dart';
 import 'package:siga_mobile/app/viewmodels/app/app_viewmodel.dart';
@@ -7,17 +8,16 @@ import 'package:siga_mobile/app/viewmodels/app/app_viewmodel.dart';
 AppViewModel _appVm = GetIt.I<AppViewModel>();
 Constants _constants = GetIt.I<Constants>();
 
-class ClientHttpService implements IRepository {
-  final Dio _dio = Dio(
-    BaseOptions(
-        baseUrl: _constants.getApiUrl, connectTimeout: _constants.getTimeout),
-  );
+class ClientHttpService extends Logger implements IRepository {
+  final Dio _dio = Dio(BaseOptions(
+      baseUrl: _constants.getApiUrl, connectTimeout: _constants.getTimeout));
 
   void init() {
+    message("registering interceptor");
     String? token = _appVm.getApiToken;
-    _dio.interceptors.add(InterceptorsWrapper(onRequest:
-        (RequestOptions options, RequestInterceptorHandler handler) async {
-      options.headers['Authorization'] = "Bearer ${token != null ? token : ''}";
+    _dio.interceptors.add(InterceptorsWrapper(
+        onRequest: (RequestOptions options, RequestInterceptorHandler handler) {
+      options.headers.addAll({'Authorization': "Bearer ${token.toString()}"});
       handler.next(options);
     }));
   }
@@ -25,6 +25,7 @@ class ClientHttpService implements IRepository {
   @override
   Future<void> addToken(String token) async {
     await _appVm.setApiToken(token);
+    init();
   }
 
   @override

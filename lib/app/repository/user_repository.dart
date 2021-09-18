@@ -5,11 +5,11 @@ import 'package:siga_mobile/app/models/user.dart';
 import 'package:siga_mobile/app/services/client_http_service.dart';
 
 class UserRepository {
-  ClientHttpService _client = GetIt.I<ClientHttpService>();
+  final ClientHttpService _httpClient = GetIt.I<ClientHttpService>();
 
   Future<User?> getUser(String id) async {
     try {
-      Response<dynamic> response = await _client.get("/safe/users/$id");
+      Response<dynamic> response = await _httpClient.get("/safe/users/$id");
       if (response.statusCode == 200) {
         return User.fromJson(response.data["data"]);
       } else
@@ -23,7 +23,7 @@ class UserRepository {
 
   Future<bool> logout() async {
     try {
-      Response<Map> response = await _client.post("/safe/logout", null);
+      Response<Map> response = await _httpClient.post("/safe/logout", null);
       if (response.statusCode == 200) {
         asuka.showSnackBar(asuka.AsukaSnackbar.info(response.data!['data']));
         return true;

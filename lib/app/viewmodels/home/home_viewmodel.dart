@@ -14,12 +14,14 @@ part 'home_viewmodel.g.dart';
 class HomeViewmodel = _HomeViewmodelBase with _$HomeViewmodel;
 
 abstract class _HomeViewmodelBase with Store {
-  UserRepository _userRepo = UserRepository();
-  LocalStorage _localStorage = GetIt.I<LocalStorage>();
-  SigaRouter _router = GetIt.I<SigaRouter>();
-  AppViewModel _appVM = GetIt.I<AppViewModel>();
+  final UserRepository _userRepo = UserRepository();
+  final LocalStorage _localStorage = GetIt.I<LocalStorage>();
+  final SigaRouter _router = GetIt.I<SigaRouter>();
+  final AppViewModel _appVM = GetIt.I<AppViewModel>();
   BuildContext? _ctx;
+
   set setCtx(BuildContext ctx) => _ctx = ctx;
+
   Future<User?> getUser() async {
     try {
       return _userRepo.getUser(await _localStorage.getStoredID());

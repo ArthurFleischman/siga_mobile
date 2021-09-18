@@ -24,7 +24,7 @@ abstract class _AppViewModelBase with Store {
   }
 
   Future<void> setApiToken(String token) async {
-    await _localStorage.put("cache", "token", token);
+    await _localStorage.put<String>("cache", "token", token);
   }
 
   Future<void> clearSessionData() async {

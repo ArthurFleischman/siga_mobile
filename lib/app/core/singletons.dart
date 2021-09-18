@@ -9,7 +9,7 @@ import 'package:siga_mobile/app/viewmodels/home/home_viewmodel.dart';
 import 'package:siga_mobile/app/viewmodels/index/index_viewmodel.dart';
 import 'package:siga_mobile/app/viewmodels/login/login_viewmodel.dart';
 
-GetIt _getIt = GetIt.instance;
+final GetIt _getIt = GetIt.instance;
 
 void registerSingletons() {
   _getIt.registerSingleton<AppViewModel>(AppViewModel(), signalsReady: true);

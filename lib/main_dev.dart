@@ -4,7 +4,7 @@ import 'package:siga_mobile/main.dart';
 import 'app/core/constants.dart';
 
 Constants _constants = GetIt.I<Constants>();
-void main() async {
+void main() {
   registerSingletons();
   _constants.setEnv = ENV.DEV;
 
