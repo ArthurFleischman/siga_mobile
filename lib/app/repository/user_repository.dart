@@ -1,10 +1,13 @@
+import 'dart:developer';
+
 import 'package:asuka/asuka.dart' as asuka;
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:siga_mobile/app/core/logger.dart';
 import 'package:siga_mobile/app/models/user.dart';
 import 'package:siga_mobile/app/services/client_http_service.dart';
 
-class UserRepository {
+class UserRepository extends Logger {
   final ClientHttpService _httpClient = GetIt.I<ClientHttpService>();
 
   Future<User?> getUser(String id) async {
@@ -12,12 +15,14 @@ class UserRepository {
       Response<dynamic> response = await _httpClient.get("/safe/users/$id");
       if (response.statusCode == 200) {
         return User.fromJson(response.data["data"]);
-      } else
-        throw (Error.safeToString(response.statusMessage));
-    } catch (e) {
-      asuka.showSnackBar(
-          asuka.AsukaSnackbar.alert("user not found\n${e.toString()}"));
-      throw e;
+      } else {
+        message("loggin out");
+        logout();
+      }
+    } catch (_) {
+      asuka.showSnackBar(asuka.AsukaSnackbar.alert("cannot fetch user"));
+
+      logout();
     }
   }
 

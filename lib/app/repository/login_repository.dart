@@ -22,7 +22,7 @@ class LoginRepository extends Logger {
       } else
         return false;
     } catch (e) {
-      print(e);
+      message(e.toString());
       return false;
     }
   }

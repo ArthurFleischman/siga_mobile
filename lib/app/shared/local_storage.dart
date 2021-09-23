@@ -26,7 +26,6 @@ class LocalStorage extends Logger implements ILocalStorage {
     }
   }
 
-  @override
   Future<void> init() async {
     await Hive.initFlutter();
     await Hive.openBox("config");

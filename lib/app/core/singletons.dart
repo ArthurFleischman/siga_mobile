@@ -12,13 +12,13 @@ import 'package:siga_mobile/app/viewmodels/login/login_viewmodel.dart';
 final GetIt _getIt = GetIt.instance;
 
 void registerSingletons() {
+  _getIt.registerSingleton<Constants>(Constants(), signalsReady: true);
+  _getIt.registerSingleton<LocalStorage>(LocalStorage());
   _getIt.registerSingleton<AppViewModel>(AppViewModel(), signalsReady: true);
   _getIt.registerSingleton<IndexViewModel>(IndexViewModel(),
       signalsReady: true);
-  _getIt.registerSingleton<Constants>(Constants(), signalsReady: true);
   _getIt.registerSingleton<Logger>(Logger(), signalsReady: true);
   _getIt.registerSingleton<SigaRouter>(SigaRouter(), signalsReady: true);
-  _getIt.registerSingleton<LocalStorage>(LocalStorage(), signalsReady: true);
   _getIt.registerSingleton<ClientHttpService>(ClientHttpService(),
       signalsReady: true);
   _getIt.registerSingleton<LoginViewmodel>(LoginViewmodel(),

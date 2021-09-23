@@ -13,10 +13,16 @@ class ClientHttpService extends Logger implements IRepository {
       baseUrl: _constants.getApiUrl, connectTimeout: _constants.getTimeout));
 
   void init() {
-    message("registering interceptor");
-    String? token = _appVm.getApiToken;
     _dio.interceptors.add(InterceptorsWrapper(
-        onRequest: (RequestOptions options, RequestInterceptorHandler handler) {
+        onError: (DioError err, ErrorInterceptorHandler handler) {
+      message(err.toString());
+      handler.next(err);
+    }, onResponse:
+            (Response<dynamic> response, ResponseInterceptorHandler handler) {
+      message(response.statusCode.toString());
+      handler.next(response);
+    }, onRequest: (RequestOptions options, RequestInterceptorHandler handler) {
+      String? token = _appVm.getApiToken;
       options.headers.addAll({'Authorization': "Bearer ${token.toString()}"});
       handler.next(options);
     }));
@@ -25,7 +31,6 @@ class ClientHttpService extends Logger implements IRepository {
   @override
   Future<void> addToken(String token) async {
     await _appVm.setApiToken(token);
-    init();
   }
 
   @override
@@ -34,7 +39,7 @@ class ClientHttpService extends Logger implements IRepository {
   }
 
   @override
-  Future<Response<Map>> get(String url) async {
+  Future<Response<dynamic>> get(String url) async {
     return await _dio.get(url);
   }
 

@@ -50,6 +50,9 @@ dependencies:
   #http client
   dio: ^4.0.0
 
+  #custom widgets
+  curved_navigation_bar: ^1.0.1
+
 
 
 dev_dependencies:

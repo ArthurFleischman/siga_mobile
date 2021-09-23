@@ -14,6 +14,5 @@ void mainEntry() async {
   await _localStorage.init();
   _httpService.init();
   _router.setupRoutes();
-
   runApp(AppWidget());
 }

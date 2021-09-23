@@ -7,6 +7,5 @@ Constants _constants = GetIt.I<Constants>();
 void main() {
   registerSingletons();
   _constants.setEnv = ENV.DEV;
-
   mainEntry();
 }
