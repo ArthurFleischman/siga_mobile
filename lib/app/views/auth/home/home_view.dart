@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:siga_mobile/app/components/text_button.dart';
 import 'package:siga_mobile/app/models/user.dart';
 import 'package:siga_mobile/app/viewmodels/home/home_viewmodel.dart';
+import 'package:siga_mobile/app/views/auth/home/home_menu.dart';
 
 HomeViewmodel _homeVM = GetIt.I<HomeViewmodel>();
 
@@ -19,15 +19,7 @@ class HomeView extends StatelessWidget {
               if (asyncSnap.connectionState == ConnectionState.waiting)
                 return CircularProgressIndicator();
               else
-                return Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text("${asyncSnap.data!.name}"),
-                    SigaTextButton(
-                        onPressed: () async => await _homeVM.logout(),
-                        text: "logout"),
-                  ],
-                );
+                return HomeMenu();
             } else
               return Placeholder();
           },
