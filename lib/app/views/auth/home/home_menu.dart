@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:siga_mobile/app/views/auth/home/home_content_list.dart';
 import 'package:siga_mobile/app/views/auth/home/home_menu_frame.dart';
 
 class HomeMenu extends StatelessWidget {
@@ -16,10 +17,7 @@ class HomeMenu extends StatelessWidget {
               child: Placeholder(),
             ),
           ),
-          Expanded(
-            flex: 2,
-            child: HomeMenuFrame(),
-          )
+          Expanded(flex: 2, child: HomeMenuFrame())
         ],
       ),
     );

@@ -43,7 +43,7 @@ class _IndexViewState extends State<IndexView> {
                     alignment: Alignment.topRight,
                     child: IndexLogoFrame(logo: IndexLogoBox())),
                 AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 300),
+                  duration: const Duration(milliseconds: 200),
                   transitionBuilder: (child, animation) => ScaleTransition(
                     child: child,
                     scale: animation,
