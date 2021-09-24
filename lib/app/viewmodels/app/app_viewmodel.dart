@@ -2,10 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mobx/mobx.dart';
 import 'package:siga_mobile/app/core/defaults.dart';
+import 'package:siga_mobile/app/core/router.dart';
+import 'package:siga_mobile/app/repository/app_reposiotry.dart';
 import 'package:siga_mobile/app/shared/local_storage.dart';
+import 'package:siga_mobile/app/views/auth/home/home_view.dart';
+import 'package:siga_mobile/app/views/unauth/index/index_view.dart';
 part 'app_viewmodel.g.dart';
 
-LocalStorage _localStorage = GetIt.I<LocalStorage>();
+final LocalStorage _localStorage = GetIt.I<LocalStorage>();
+final SigaRouter _router = GetIt.I<SigaRouter>();
+final AppRepository _appRepo = AppRepository();
+
 class AppViewModel = _AppViewModelBase with _$AppViewModel;
 
 abstract class _AppViewModelBase with Store {
@@ -14,6 +21,7 @@ abstract class _AppViewModelBase with Store {
 
   ThemeMode get getCurrentTheme =>
       _appTheme == AppTheme.LIGHT ? ThemeMode.light : ThemeMode.dark;
+  String? get getApiToken => _localStorage.get<String?>("cache", "token");
 
   @action
   void changeTheme() {
@@ -27,9 +35,13 @@ abstract class _AppViewModelBase with Store {
     await _localStorage.put<String>("cache", "token", token);
   }
 
-  Future<void> clearSessionData() async {
-    await _localStorage.clearSessionData();
+  Future<void> setInitialRoute() async {
+    if (_localStorage.get<String?>("cache", "token") != null &&
+        (await _appRepo.isSessionValid())) {
+      print("home INITIAL");
+      _router.setInitialRoute = HomeView();
+      print(_router.getInitialRoute.toString());
+    } else
+      _router.setInitialRoute = IndexView();
   }
-
-  String? get getApiToken => _localStorage.get<String?>("cache", "token");
 }

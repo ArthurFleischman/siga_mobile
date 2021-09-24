@@ -12,8 +12,12 @@ class HomeContentList extends StatelessWidget {
         itemCount: 3,
         scrollDirection: Axis.horizontal,
         itemBuilder: (BuildContext context, int index) {
-          return Card(
-            child: SizedBox(height: 200, width: 200, child: Text("ok $index")),
+          return Container(
+            height: 20,
+            width: 100,
+            child: Card(
+              child: ListTile(title: Text("ok $index")),
+            ),
           );
         });
   }

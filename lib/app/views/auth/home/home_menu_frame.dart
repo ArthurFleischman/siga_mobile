@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:siga_mobile/app/components/text_button.dart';
 import 'package:siga_mobile/app/viewmodels/home/home_viewmodel.dart';
 import 'package:siga_mobile/app/views/auth/home/home_content_list.dart';
 
@@ -26,17 +25,16 @@ class HomeMenuFrame extends StatelessWidget {
           //   style: BorderStyle.solid,
           // ),
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        child: Stack(
           children: [
-            SigaTextButton(
-              text: "Lgout",
-              onPressed: _viewmodel.logout,
+            Positioned(
+              top: 30,
+              child: Container(
+                height: 100,
+                width: 100,
+                child: HomeContentList(),
+              ),
             ),
-            SizedBox(
-              height: 100,
-              child: HomeContentList(),
-            )
           ],
         ));
   }

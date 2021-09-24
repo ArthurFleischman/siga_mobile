@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:asuka/asuka.dart' as asuka;
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
@@ -15,18 +13,13 @@ class UserRepository extends Logger {
       Response<dynamic> response = await _httpClient.get("/safe/users/$id");
       if (response.statusCode == 200) {
         return User.fromJson(response.data["data"]);
-      } else {
-        message("loggin out");
-        logout();
       }
-    } catch (_) {
-      asuka.showSnackBar(asuka.AsukaSnackbar.alert("cannot fetch user"));
-
-      logout();
+    } catch (e) {
+      throw e;
     }
   }
 
-  Future<bool> logout() async {
+  Future<bool> logout({bool withRequest = false}) async {
     try {
       Response<Map> response = await _httpClient.post("/safe/logout", null);
       if (response.statusCode == 200) {

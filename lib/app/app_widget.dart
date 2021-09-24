@@ -13,6 +13,7 @@ final _const = GetIt.I<Constants>();
 class AppWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    print(_router.getInitialRoute.toString());
     return FutureBuilder(
       future: GetIt.I.allReady(),
       builder: (BuildContext context, AsyncSnapshot snapshot) => Observer(
