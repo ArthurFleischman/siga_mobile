@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:siga_mobile/app/core/defaults.dart';
+import 'package:siga_mobile/app/core/enums.dart';
 import 'package:siga_mobile/app/core/theme.dart';
-
-class ENV {
-  static const String DEV = "DEV";
-  static const String PRD = "PRD";
-}
 
 class Constants {
   String _env = Defaults.defaultEnv;

@@ -12,13 +12,13 @@ mixin _$AppViewModel on _AppViewModelBase, Store {
   final _$_appThemeAtom = Atom(name: '_AppViewModelBase._appTheme');
 
   @override
-  AppTheme get _appTheme {
+  String get _appTheme {
     _$_appThemeAtom.reportRead();
     return super._appTheme;
   }
 
   @override
-  set _appTheme(AppTheme value) {
+  set _appTheme(String value) {
     _$_appThemeAtom.reportWrite(value, super._appTheme, () {
       super._appTheme = value;
     });

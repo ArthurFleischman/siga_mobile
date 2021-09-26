@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-
 import 'package:siga_mobile/app/core/logger.dart';
 import 'package:siga_mobile/app/interfaces/i_router.dart';
-
 import 'package:siga_mobile/app/views/unauth/index/index_view.dart';
 
 class SigaRouter extends Logger implements IRouter {

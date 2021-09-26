@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:hive/hive.dart';
 import 'package:mobx/mobx.dart';
+
 import 'package:siga_mobile/app/core/defaults.dart';
+import 'package:siga_mobile/app/core/enums.dart';
 import 'package:siga_mobile/app/core/router.dart';
 import 'package:siga_mobile/app/repository/app_reposiotry.dart';
 import 'package:siga_mobile/app/shared/local_storage.dart';
@@ -16,8 +19,12 @@ final AppRepository _appRepo = AppRepository();
 class AppViewModel = _AppViewModelBase with _$AppViewModel;
 
 abstract class _AppViewModelBase with Store {
+  Stream<BoxEvent> getBoxStream() {
+    return _localStorage.getBoxStream();
+  }
+
   @observable
-  AppTheme _appTheme = Defaults.defualtTheme;
+  String _appTheme = Defaults.defualtTheme;
 
   ThemeMode get getCurrentTheme =>
       _appTheme == AppTheme.LIGHT ? ThemeMode.light : ThemeMode.dark;
@@ -38,9 +45,7 @@ abstract class _AppViewModelBase with Store {
   Future<void> setInitialRoute() async {
     if (_localStorage.get<String?>("cache", "token") != null &&
         (await _appRepo.isSessionValid())) {
-      print("home INITIAL");
       _router.setInitialRoute = HomeView();
-      print(_router.getInitialRoute.toString());
     } else
       _router.setInitialRoute = IndexView();
   }

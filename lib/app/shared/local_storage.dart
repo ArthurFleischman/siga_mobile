@@ -1,9 +1,14 @@
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:siga_mobile/app/core/defaults.dart';
 import 'package:siga_mobile/app/core/logger.dart';
 import 'package:siga_mobile/app/interfaces/i_local_storage.dart';
 
 class LocalStorage extends Logger implements ILocalStorage {
+  Stream<BoxEvent> getBoxStream() {
+    return Hive.box("config").watch(key: "theme");
+  }
+
   @override
   Future<bool> delete() async {
     return true;
