@@ -1,6 +1,6 @@
 # siga_mobile
 
-A new Flutter project.
+Improved version of the traditional brazilian university student platform
 
 ## Getting Started
 
